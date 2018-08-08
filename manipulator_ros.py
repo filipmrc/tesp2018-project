@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import String
 import os, inspect
 import numpy as np
 import pybullet as p
@@ -8,8 +7,7 @@ import time
 import pybullet_data
 from manipulator import Manipulator
 from geometry_msgs.msg import Pose
-from flow_sim import Natgorithm
-
+from audio_lib import Sine
 
 class HapticDemo(object):
     def __init__(self,mnp):
@@ -32,13 +30,28 @@ class HapticDemo(object):
         delta = np.array([data.position.x,data.position.y,data.position.z])
 
         # Get current end-effector pose, sparate position and rotation
-        pose = manipulator.get_end_effector_pose()
+        pose = self.m.get_end_effector_pose()
         goal_pos = pose[0:3] + delta
         goal_rot = pose[4:7]
+
+        # Check for collisions
+        collision = self.m.check_contact()
+
+        # If in collision apply vibration
+        if collision:
+            self.vibrate()
 
         # Set the goal for the manipulator object and
         self.m.set_frame_pose_goal(endEffectorIndex, goal_pos, goal_rot)
         self.m.update()
+
+    def vibrate(self):
+        pulse1 = Sine(frequency=80)
+        pulse1.attack = 0.071
+        pulse1.sustain = 0.479
+        pulse1.release = 0.043
+        pulse1.channel = 1
+        pulse1.play(1.0, blocking=True)
 
 if __name__ == '__main__':
     # Set up the simulation
@@ -56,7 +69,7 @@ if __name__ == '__main__':
     # Spawn the Jaco manipulator
     armStartPos = [1, 0, 0.7]
     armStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-    endEffectorIndex = 7
+    endEffectorIndex = 8
     jaco = [p.loadURDF(currentdir + "/models/urdf/jaco.urdf")]  # load arm
     p.resetBasePositionAndOrientation(jaco[0], armStartPos, armStartOrientation)
 

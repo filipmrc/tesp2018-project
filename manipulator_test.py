@@ -5,6 +5,7 @@ import pybullet as p
 import time
 import pybullet_data
 from manipulator import Manipulator
+from audio_lib import Sine
 
 
 def update_keys():
@@ -28,12 +29,20 @@ def update_keys():
 
     return result
 
-def matprint(mat, fmt="g"):
-    col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
-    for x in mat:
-        for i, y in enumerate(x):
-            print(("{:"+str(col_maxes[i])+fmt+"}").format(y), end="  ")
-        print("")
+#def matprint(mat, fmt="g"):
+#    col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
+#    for x in mat:
+#        for i, y in enumerate(x):
+#            print(("{:"+str(col_maxes[i])+fmt+"}").format(y), end = " ")
+#        print("")
+
+def vibrate():
+    pulse1 = Sine(frequency=80)
+    pulse1.attack = 0.071
+    pulse1.sustain = 0.479
+    pulse1.release = 0.043
+    pulse1.channel = 1
+    pulse1.play(1.0, blocking=True)
         
 cid = p.connect(p.GUI_SERVER)  # stuff above hangs much of the time for some reason
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) #get current directory
@@ -71,6 +80,9 @@ while(1):
     manipulator.set_frame_pose_goal(endEffectorIndex,goal_pos,goal_rot)
     manipulator.close_gripper()
     manipulator.update()
+    c = manipulator.check_contact()
+    if c:
+        vibrate()
     #matprint(manipulator.get_manipulability_ellipsoid()) # 9,11,13 are gripper indices
     #print("---------------------------------")
     #goal_pos = goal_pos + np.array([0,0,-0.01])

@@ -95,7 +95,8 @@ while(1):
 
     # Update pose goal
     goal_pos = goal_pos + cmd
-    manipulator.set_frame_pose_goal(endEffectorIndex,goal_pos,goal_rot)
+    #manipulator.set_frame_pose_goal(endEffectorIndex,goal_pos,goal_rot)
+    manipulator.set_frame_position_goal(endEffectorIndex,goal_pos)
 
     # Check gripper flag and update gripper goal
     if grip==0:
@@ -110,7 +111,8 @@ while(1):
     c = manipulator.check_contact()
     if c:
         print("vibrate")
-        vibrate()
+        #vibrate()
+        #vibrate()
 
     time.sleep(0.01)
 

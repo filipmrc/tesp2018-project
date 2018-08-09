@@ -88,7 +88,7 @@ class Manipulator(object):
         Position control loop, max torques set to an arbitrary 5000
         """
         p.setJointMotorControlArray(self.arm[0], jointIndices=self._active_joint_indices,
-                                    controlMode=p.POSITION_CONTROL, targetPositions=cmd)
+                                    controlMode=p.POSITION_CONTROL, targetPositions=cmd, forces = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000])
 
     def _joint_velocity_control(self, cmd):
         """
@@ -225,6 +225,12 @@ class Manipulator(object):
         ''' set a pose goal for an arbitrary frame'''
         result = p.calculateInverseKinematics(self.arm[0], index, targetPosition=t_pos.tolist(),
                                               targetOrientation=t_rot.tolist(), maxNumIterations = 200, residualThreshold = 0.002)
+        self.pos_cmd = result
+        return self.pos_cmd
+
+    def set_frame_position_goal(self, index, t_pos):
+        ''' set a pose goal for an arbitrary frame'''
+        result = p.calculateInverseKinematics(self.arm[0], index, targetPosition=t_pos.tolist(), maxNumIterations = 200, residualThreshold = 0.002)
         self.pos_cmd = result
         return self.pos_cmd
 

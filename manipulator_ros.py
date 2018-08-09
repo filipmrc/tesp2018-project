@@ -98,7 +98,7 @@ if __name__ == '__main__':
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))  # get current directory
 
     # Spawn the Jaco manipulator
-    armStartPos = [1, 0, 0.9]
+    armStartPos = [1, 0, 0.8]
     armStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
     endEffectorIndex = 8
     jaco = [p.loadURDF(currentdir + "/models/urdf/jaco.urdf")]  # load arm

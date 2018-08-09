@@ -69,7 +69,7 @@ if __name__ == '__main__':
     p.resetSimulation()
     p.setAdditionalSearchPath(pybullet_data.getDataPath()) # I hate this block of code
     p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 1)
-    p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, 0)
+	p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, 0)
     p.setGravity(0, 0, -10)
     p.setRealTimeSimulation(1)
 

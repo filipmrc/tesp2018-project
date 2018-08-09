@@ -24,6 +24,28 @@ class HapticDemo(object):
         # Flag for Kinect initialization
         self.kinect_zero_set = False
 
+        self.pulse1 = Sine(frequency=160)
+        self.pulse1.attack = 0.015
+        self.pulse1.sustain = 0.02
+        self.pulse1.release = 0.004
+        self.pulse1.channel = 1
+        self.pulse2 = self.pulse1 * 1.0
+        self.pulse2.channel = 2
+        self.pulse3 = self.pulse1 + self.pulse2
+        self.pulse3 *= 5
+
+        self.noise1 = Sine(frequency=100)
+        self.noise1.channel = 1
+        self.noise2 = Sine(frequency=97)
+        self.noise2.channel = 2
+        self.noise3 = self.noise1 + self.noise2
+        self.noise3 *= 0.1
+
+        self.pulse3 += self.noise3
+
+        self.touched_last = False
+        self.touched_last_t = time.time()
+
         # Start spinning thread
         rospy.spin()
 
@@ -44,23 +66,22 @@ class HapticDemo(object):
             goal_rot = self.zero_pose[4:7]
 
             # Check for collisions
-            collision = self.m.check_contact()
-
-            # If in collision apply vibration
-            if collision:
-                self.vibrate()
+            c = manipulator.check_contact()
+            if c and time.time() - self.touched_last_t > 0.7:
+                if not self.touched_last:
+                    self.pulse3.play(blocking=False, loop=False, device=1)
+                else:
+                    self.noise3.play(blocking=False, loop=True, device=1)
+                self.touched_last_t = time.time()
+            elif not c and self.touched_last:
+                self.noise3.stop()
+                self.pulse3.stop()
+            self.touched_last = c
 
             # Set the goal for the manipulator object and
             self.m.set_frame_pose_goal(endEffectorIndex, goal_pos, goal_rot)
             self.m.update()
 
-    def vibrate(self):
-        pulse1 = Sine(frequency=80)
-        pulse1.attack = 0.071
-        pulse1.sustain = 0.479
-        pulse1.release = 0.043
-        pulse1.channel = 1
-        pulse1.play(1.0, blocking=True)
 
 if __name__ == '__main__':
     # Set up the simulation
@@ -69,6 +90,7 @@ if __name__ == '__main__':
     p.resetSimulation()
     p.setAdditionalSearchPath(pybullet_data.getDataPath()) # I hate this block of code
     p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 1)
+    p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, 0)
     p.setGravity(0, 0, -10)
     p.setRealTimeSimulation(1)
 
@@ -76,7 +98,7 @@ if __name__ == '__main__':
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))  # get current directory
 
     # Spawn the Jaco manipulator
-    armStartPos = [1, 0, 0.7]
+    armStartPos = [1, 0, 0.9]
     armStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
     endEffectorIndex = 8
     jaco = [p.loadURDF(currentdir + "/models/urdf/jaco.urdf")]  # load arm

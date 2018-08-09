@@ -115,7 +115,7 @@ if __name__ == '__main__':
 
     # Initialize the manipulator class
     manipulator = Manipulator(jaco, cid, endEffectorIndex, 'p')
-    jointPositions = [0, 3.14, 3.14 / 2, -3.14 / 2, -3.14 / 2, 0, 0, 0, 0]  # set joint position goal
+    jointPositions = [0, 3.14, 3.14 / 2, -3.14 / 2, 0, 0, 0, 0, 0]  # set joint position goal
     manipulator.set_joint_position_goal(jointPositions)
     manipulator.update()  # update joint position
     time.sleep(1)

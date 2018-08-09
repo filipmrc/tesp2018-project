@@ -79,7 +79,8 @@ objects = [p.loadURDF("duck_vhacd.urdf", 0.850000, -0.400000, 0.900000, 0.000000
 
 # Initialize the manipulator class
 manipulator = Manipulator(jaco,cid,endEffectorIndex,'p', [6,7,8])
-jointPositions=[ 0, 3.14, 3.14/2, -3.14/2, -3.14/2, 0, 0, 0, 0] #set joint position goal
+#jointPositions=[ 0, 3.14, 3.14/2, -3.14/2, -3.14/2, 0, 0, 0, 0] #set joint position goal
+jointPositions = [0, 3.14, 3.14 / 2, -3.14 / 2, 0, 0, 0, 0, 0]  # set joint position goal
 manipulator.set_joint_position_goal(jointPositions)
 manipulator.update() #update joint position
 time.sleep(1)

@@ -108,7 +108,7 @@ class Wave(object):
         self.wave[start:start + points] *= np.linspace(1.0, 0.0, points)
         self.wave[start + points:] *= 0.0
 
-    def play(self, duration=1.0, blocking=False, loop=False, device=11):
+    def play(self, duration=1.0, blocking=False, loop=False, device=3):
         sd.play(self.wave, loop=loop, mapping=self.channels, device=device)
         if blocking:
             sleep(duration)

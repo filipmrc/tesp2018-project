@@ -59,7 +59,7 @@ class HapticDemo(object):
         else:
             # Get hand position relative to starting point
             # (i.e. delta to be applied to current manipulator position)
-            delta = np.array([(data.position.x - self.kinect_zero[0])/1000, (data.position.y- self.kinect_zero[1])/1000, (data.position.z- self.kinect_zero[2])/1000])
+            delta = np.array([(data.position.x - self.kinect_zero[0])/500, (data.position.y- self.kinect_zero[1])/500, (data.position.z- self.kinect_zero[2])/500])
 
             # Get current end-effector pose, sparate position and rotation
             goal_pos = self.zero_pose[0:3] + delta
@@ -69,9 +69,9 @@ class HapticDemo(object):
             c = manipulator.check_contact()
             if c and time.time() - self.touched_last_t > 0.7:
                 if not self.touched_last:
-                    self.pulse3.play(blocking=False, loop=False, device=1)
+                    self.pulse3.play(blocking=False, loop=False, device=3)
                 else:
-                    self.noise3.play(blocking=False, loop=True, device=1)
+                    self.noise3.play(blocking=False, loop=True, device=3)
                 self.touched_last_t = time.time()
             elif not c and self.touched_last:
                 self.noise3.stop()

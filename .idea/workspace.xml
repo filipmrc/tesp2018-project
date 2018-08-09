@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f8446ed2-b588-417c-ae39-ac18a3fac1de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manipulator_ros.py" beforeDir="false" afterPath="$PROJECT_DIR$/manipulator_ros.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manipulator_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/manipulator_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio_lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/audio_lib.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,29 +36,29 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3122" />
+          <entry key="py" value="3437" />
           <entry key="txt" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Python" value="3122" />
+          <entry key="Python" value="3437" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manipulator_ros.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+            <state relative-caret-position="495">
+              <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
               <folding>
                 <element signature="e#22#34#0" expanded="true" />
-                <marker date="1533803337382" expanded="true" signature="299:322" ph="..." />
-                <marker date="1533803337382" expanded="true" signature="363:372" ph="..." />
+                <marker date="1533808219977" expanded="true" signature="299:322" ph="..." />
+                <marker date="1533808219977" expanded="true" signature="363:372" ph="..." />
               </folding>
             </state>
           </provider>
@@ -77,13 +76,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/audio_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+            <state relative-caret-position="904">
+              <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
               <folding>
-                <element signature="e#42#66#0" expanded="true" />
+                <element signature="e#42#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,15 +115,15 @@
         <option value="$PROJECT_DIR$/flow_sim.py" />
         <option value="$PROJECT_DIR$/manipulator.py" />
         <option value="$PROJECT_DIR$/haptic/audio_lib.py" />
-        <option value="$PROJECT_DIR$/audio_lib.py" />
         <option value="$PROJECT_DIR$/manipulator_test.py" />
         <option value="$PROJECT_DIR$/manipulator_ros.py" />
+        <option value="$PROJECT_DIR$/audio_lib.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="831" />
-    <option name="y" value="365" />
+    <option name="x" value="593" />
+    <option name="y" value="352" />
     <option name="width" value="1914" />
     <option name="height" value="1053" />
   </component>
@@ -141,16 +140,6 @@
             <path>
               <item name="tesp" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesp" type="462c0819:PsiDirectoryNode" />
-              <item name="haptic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesp" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -181,7 +170,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.manipulator_test">
+  <component name="RunManager" selected="Python.manipulator_ros">
     <configuration name="danielialgorithm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="tesp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -252,8 +241,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.manipulator_test" />
         <item itemvalue="Python.manipulator_ros" />
+        <item itemvalue="Python.manipulator_test" />
         <item itemvalue="Python.danielialgorithm" />
       </list>
     </recent_temporary>
@@ -290,26 +279,47 @@
       <option name="project" value="LOCAL" />
       <updated>1533795453949</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new">
+      <created>1533803351948</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1533803351948</updated>
+    </task>
+    <task id="LOCAL-00005" summary="new">
+      <created>1533806586950</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1533806586950</updated>
+    </task>
+    <task id="LOCAL-00006" summary="new">
+      <created>1533808031603</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1533808031603</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="2882" height="1596" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2499125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2499125" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24252717" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.499825" weight="0.24252717" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.3294837" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.500175" side_tool="true" weight="0.24252717" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -352,16 +362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/audio_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-          <folding>
-            <element signature="e#42#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manipulator_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1125">
@@ -374,12 +374,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manipulator_ros.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+        <state relative-caret-position="495">
+          <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
           <folding>
             <element signature="e#22#34#0" expanded="true" />
-            <marker date="1533803337382" expanded="true" signature="299:322" ph="..." />
-            <marker date="1533803337382" expanded="true" signature="363:372" ph="..." />
+            <marker date="1533808219977" expanded="true" signature="299:322" ph="..." />
+            <marker date="1533808219977" expanded="true" signature="363:372" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/audio_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="904">
+          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+          <folding>
+            <element signature="e#42#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

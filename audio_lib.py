@@ -2,15 +2,15 @@
 Created by Alejandro Daniel Noel
 """
 
-import sounddevice as sd
-import numpy as np
 from time import sleep
 
+import numpy as np
+import sounddevice as sd
 
 sampling_freq = 48000
 
 
-class Wave:
+class Wave(object):
     def __init__(self, wave=None, channel=1):
         self.wave = wave if wave is not None else np.ones(sampling_freq)
         self._delay = 0.0
@@ -18,22 +18,43 @@ class Wave:
         self._attack = 0.0
         self._sustain = 0.0
         self._release = 0.0
-        self.channel = channel
+        self.channels = np.array([channel]) if channel is 1 else channel
+        if not isinstance(channel, np.ndarray):
+            self.channel = channel
 
     def __add__(self, other):
-        if other.channel != self.channel:
-            if self.channel == 1:
-                return Wave(np.column_stack((self.wave, other.wave)))
-            else:
-                return Wave(np.column_stack((other.wave, self.wave)))
-        else:
-            return Wave(self.wave + other.wave)
+        max_chan = max(max(self.channels), max(other.channels))
+        self.make_up_to_channel(max_chan)
+        other.make_up_to_channel(max_chan)
+        new_channels = np.array(list(set(list(np.concatenate((self.channels, other.channels))))))
+        np.sort(new_channels)
+        return Wave(self.wave + other.wave, channel=new_channels)
 
     def __mul__(self, other):
         if isinstance(other, Wave):
-            return Wave(self.wave * other.wave)
+            max_chan = max(max(self.channels), max(other.channels))
+            self.make_up_to_channel(max_chan)
+            other.make_up_to_channel(max_chan)
+            new_channels = np.array(list(set(list(np.concatenate((self.channels, other.channels))))))
+            np.sort(new_channels)
+            return Wave(self.wave * other.wave, channel=new_channels)
         else:
-            return Wave(self.wave * other)
+            return Wave(self.wave * other, channel=self.channels)
+
+    @property
+    def channel(self):
+        return self.channels
+
+    @channel.setter
+    def channel(self, value):
+        # assert self.channels.size == 1
+        self.channels = np.array([value])
+        if value > 1:
+            self.wave = np.column_stack((np.zeros((sampling_freq, value - 1)), self.wave))
+
+    def make_up_to_channel(self, channel_num):
+        if channel_num - max(self.channels) > 0:
+            self.wave = np.column_stack((self.wave, np.zeros((sampling_freq, channel_num - max(self.channels)))))
 
     @property
     def delay(self):
@@ -81,17 +102,14 @@ class Wave:
 
     @release.setter
     def release(self, value):
-        self._release=value
-        points= int(value * sampling_freq)
-        start= int((self.sustain + self.attack +self.delay) * sampling_freq)
+        self._release = value
+        points = int(value * sampling_freq)
+        start = int((self.sustain + self.attack + self.delay) * sampling_freq)
         self.wave[start:start + points] *= np.linspace(1.0, 0.0, points)
         self.wave[start + points:] *= 0.0
 
-    def play(self, duration, blocking=False):
-        if self.wave.ndim == 1:
-            sd.play(self.wave, loop=True, mapping=self.channel)
-        else:
-            sd.play(self.wave, loop=True, mapping=(1, 2))
+    def play(self, duration=1.0, blocking=False, loop=False, device=0):
+        sd.play(self.wave, loop=loop, mapping=self.channels, device=device)
         if blocking:
             sleep(duration)
             sd.stop()
@@ -108,20 +126,16 @@ class Sine(Wave):
 
 
 if __name__ == "__main__":
-    awave1 = Sine(frequency=942)
-    awave1.delay = 0.231
-    awave1.attack = 0.071
-    awave1.sustain = 0.479
-    awave1.release = 0.043
+    awave1 = Sine(frequency=160)
+    awave1.attack = 0.02
+    awave1.sustain = 0.03
+    awave1.release = 0.004
     awave1.channel = 1
 
-    awave2 = Sine(frequency=825)
-    awave2.delay = 0.0
-    awave2.attack = 0.059
-    awave2.sustain = 0.465
-    awave2.release = 0.040
+    awave2 = awave1 * 1.0
     awave2.channel = 2
 
-    awave3 = awave1 + awave2
-    awave3 *= 0.5
-    awave3.play(1.0,device=0, blocking=True)
+    sd.OutputStream
+    awave5 = awave1 + awave2
+    awave5 *= 0.5
+    awave5.play(1.0, blocking=True, device=1)

@@ -74,9 +74,8 @@ if __name__ == '__main__':
     p.resetBasePositionAndOrientation(jaco[0], armStartPos, armStartOrientation)
 
     # Spawn environment
-    plane = [
-        p.loadURDF("plane.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)]  # load plane
-    objects = [p.loadURDF("table/table.urdf", 1.000000,-0.200000,0.000000,0.000000,0.000000,0.707107,0.707107)]
+    p.loadURDF("plane.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)  # load plane
+    p.loadURDF("table/table.urdf", 1.000000,-0.200000,0.000000,0.000000,0.000000,0.707107,0.707107)
 
     # Initialize the manipulator class
     manipulator = Manipulator(jaco, cid, endEffectorIndex, 'p')

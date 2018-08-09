@@ -42,7 +42,17 @@ def vibrate():
     pulse1.sustain = 0.479
     pulse1.release = 0.043
     pulse1.channel = 1
-    pulse1.play(1.0, blocking=True)
+    #pulse1.play(1.0, blocking=True)
+
+    pulse2 = Sine(frequency=80)
+    pulse2.delay = 0.1
+    pulse2.attack = 0.071
+    pulse2.sustain = 0.479
+    pulse2.release = 0.043
+    pulse2.channel = 2
+
+    pulse3 = pulse1 + pulse2
+    pulse3.play(1.0, blocking=True)
         
 cid = p.connect(p.GUI_SERVER)  # stuff above hangs much of the time for some reason
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) #get current directory
@@ -82,6 +92,7 @@ while(1):
     manipulator.update()
     c = manipulator.check_contact()
     if c:
+        print("vibrate")
         vibrate()
     #matprint(manipulator.get_manipulability_ellipsoid()) # 9,11,13 are gripper indices
     #print("---------------------------------")

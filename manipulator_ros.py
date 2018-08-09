@@ -7,6 +7,7 @@ import time
 import pybullet_data
 from manipulator import Manipulator
 from geometry_msgs.msg import Pose
+from std_msgs.msg import Float64MultiArray
 from audio_lib import Sine
 
 class HapticDemo(object):
@@ -18,16 +19,16 @@ class HapticDemo(object):
         rospy.init_node('listener', anonymous=True)
 
         # Start up the ROS subscriber for Kinect
-        rospy.Subscriber("kinect", Pose, self.callback)
+        rospy.Subscriber("/servo/command", Float64MultiArray, self.callback)
 
         # Start spinning thread
         rospy.spin()
 
 
-    def callback(self, data):
+    def callback(self, msg):
         # Get hand position relative to starting point
         # (i.e. delta to be applied to current manipulator position)
-        delta = np.array([data.position.x,data.position.y,data.position.z])
+        delta = np.array([msg.data[0], msg.data[1], msg.data[2]])
 
         # Get current end-effector pose, sparate position and rotation
         pose = self.m.get_end_effector_pose()
@@ -76,6 +77,11 @@ if __name__ == '__main__':
     # Spawn environment
     p.loadURDF("plane.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)  # load plane
     p.loadURDF("table/table.urdf", 1.000000,-0.200000,0.000000,0.000000,0.000000,0.707107,0.707107)
+    objects = [p.loadURDF("jenga/jenga.urdf", 1.300000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    objects = [p.loadURDF("jenga/jenga.urdf", 1.200000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    objects = [p.loadURDF("jenga/jenga.urdf", 1.100000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    objects = [p.loadURDF("jenga/jenga.urdf", 1.000000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    objects = [p.loadURDF("jenga/jenga.urdf", 0.900000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
 
     # Initialize the manipulator class
     manipulator = Manipulator(jaco, cid, endEffectorIndex, 'p')

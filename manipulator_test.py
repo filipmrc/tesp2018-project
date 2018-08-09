@@ -7,34 +7,34 @@ import pybullet_data
 from manipulator import Manipulator
 from audio_lib import Sine
 
+grip = 0
 
 def update_keys():
+    global grip
     keys = p.getKeyboardEvents()
     result = np.array([0,0,0])
     for k in keys:
         if k == ord('l'):
-            result = np.array([0.01,0,0])
+            result = np.array([0.005,0,0])
         elif k == ord('j'):
-            result = np.array([-0.01, 0, 0])
+            result = np.array([-0.005, 0, 0])
         elif k == ord('i'):
-            result = np.array([0, 0.01, 0])
+            result = np.array([0, 0.005, 0])
         elif k == ord('k'):
-            result = np.array([0, -0.01, 0])
+            result = np.array([0, -0.005, 0])
         elif k == ord('o'):
-            result = np.array([0, 0, 0.01])
+            result = np.array([0, 0, 0.005])
         elif k == ord('u'):
-            result = np.array([0, 0, -0.01])
+            result = np.array([0, 0, -0.005])
         elif k == ord('u'):
-            result = np.array([0, 0, -0.01])
+            result = np.array([0, 0, -0.005])
+
+        if k == ord('b'):
+            grip = 1
+        elif k == ord('n'):
+            grip = 0
 
     return result
-
-#def matprint(mat, fmt="g"):
-#    col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
-#    for x in mat:
-#        for i, y in enumerate(x):
-#            print(("{:"+str(col_maxes[i])+fmt+"}").format(y), end = " ")
-#        print("")
 
 def vibrate():
     pulse1 = Sine(frequency=80)
@@ -73,6 +73,9 @@ p.resetBasePositionAndOrientation(jaco[0],armStartPos,armStartOrientation)
 # Spawn environment
 plane = [p.loadURDF("plane.urdf", 0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000)] #load plane
 objects = [p.loadURDF("table/table.urdf", 1.000000,-0.200000,0.000000,0.000000,0.000000,0.707107,0.707107)]
+objects = [p.loadURDF("cube_small.urdf", 0.950000, -0.100000, 0.700000, 0.000000, 0.000000, 0.707107, 0.707107)]
+objects = [p.loadURDF("sphere_small.urdf", 0.850000, -0.400000, 0.700000, 0.000000, 0.000000, 0.707107, 0.707107)]
+objects = [p.loadURDF("duck_vhacd.urdf", 0.850000, -0.400000, 0.900000, 0.000000, 0.000000, 0.707107, 0.707107)]
 
 # Initialize the manipulator class
 manipulator = Manipulator(jaco,cid,endEffectorIndex,'p', [6,7,8])
@@ -85,18 +88,29 @@ goal_pos = pose[0:3]
 goal_rot = pose[3:7]
 
 while(1):
+
+    # Check key press
     cmd = update_keys()
+
+    # Update pose goal
     goal_pos = goal_pos + cmd
     manipulator.set_frame_pose_goal(endEffectorIndex,goal_pos,goal_rot)
-    manipulator.close_gripper()
+
+    # Check gripper flag and update gripper goal
+    if grip==0:
+        manipulator.open_gripper()
+    elif grip==1:
+        manipulator.close_gripper()
+
+    # Update manipulator state
     manipulator.update()
+
+    # Check for contact and vibrate
     c = manipulator.check_contact()
     if c:
         print("vibrate")
         vibrate()
-    #matprint(manipulator.get_manipulability_ellipsoid()) # 9,11,13 are gripper indices
-    #print("---------------------------------")
-    #goal_pos = goal_pos + np.array([0,0,-0.01])
+
     time.sleep(0.01)
 
 

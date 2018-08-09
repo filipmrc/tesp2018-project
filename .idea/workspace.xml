@@ -37,14 +37,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2642" />
-          <entry key="txt" value="10" />
+          <entry key="py" value="3122" />
+          <entry key="txt" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="2642" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="3122" />
         </counts>
       </usages-collector>
     </session>
@@ -54,12 +54,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manipulator_ros.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="822">
-              <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+            <state relative-caret-position="450">
+              <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
               <folding>
                 <element signature="e#22#34#0" expanded="true" />
-                <marker date="1533794394888" expanded="true" signature="256:279" ph="..." />
-                <marker date="1533794394888" expanded="true" signature="320:329" ph="..." />
+                <marker date="1533803337382" expanded="true" signature="299:322" ph="..." />
+                <marker date="1533803337382" expanded="true" signature="363:372" ph="..." />
               </folding>
             </state>
           </provider>
@@ -68,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manipulator_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="1125">
+              <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -80,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/audio_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1800">
-              <caret line="126" column="29" selection-start-line="126" selection-start-column="29" selection-end-line="126" selection-end-column="29" />
+            <state relative-caret-position="537">
+              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
               <folding>
                 <element signature="e#42#66#0" expanded="true" />
               </folding>
@@ -92,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manipulator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-648">
-              <caret line="162" column="22" selection-start-line="162" selection-start-column="22" selection-end-line="162" selection-end-column="22" />
+            <state relative-caret-position="-1593">
+              <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -146,6 +146,11 @@
               <item name="tesp" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesp" type="462c0819:PsiDirectoryNode" />
               <item name="haptic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tesp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tesp" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -271,18 +276,33 @@
       <option name="project" value="LOCAL" />
       <updated>1533709376050</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new">
+      <created>1533794894477</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1533794894477</updated>
+    </task>
+    <task id="LOCAL-00003" summary="new">
+      <created>1533795453948</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1533795453949</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="2882" height="1596" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2499125" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2499125" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24252717" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24252717" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -301,7 +321,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="safe mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="safe mode" />
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/flow_sim.py">
@@ -324,10 +345,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/manipulator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1593">
+          <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/audio_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="126" column="29" selection-start-line="126" selection-start-column="29" selection-end-line="126" selection-end-column="29" />
+        <state relative-caret-position="537">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
           <folding>
             <element signature="e#42#66#0" expanded="true" />
           </folding>
@@ -336,29 +364,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manipulator_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="1125">
+          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
           <folding>
             <element signature="e#24#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manipulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648">
-          <caret line="162" column="22" selection-start-line="162" selection-start-column="22" selection-end-line="162" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manipulator_ros.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="822">
-          <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+        <state relative-caret-position="450">
+          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
           <folding>
             <element signature="e#22#34#0" expanded="true" />
-            <marker date="1533794394888" expanded="true" signature="256:279" ph="..." />
-            <marker date="1533794394888" expanded="true" signature="320:329" ph="..." />
+            <marker date="1533803337382" expanded="true" signature="299:322" ph="..." />
+            <marker date="1533803337382" expanded="true" signature="363:372" ph="..." />
           </folding>
         </state>
       </provider>

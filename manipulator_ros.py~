@@ -59,7 +59,7 @@ class HapticDemo(object):
         else:
             # Get hand position relative to starting point
             # (i.e. delta to be applied to current manipulator position)
-            delta = np.array([(data.position.x - self.kinect_zero[0])/500, (data.position.y- self.kinect_zero[1])/500, (data.position.z- self.kinect_zero[2])/500])
+            delta = np.array([(data.position.x - self.kinect_zero[1])/500, (data.position.y- self.kinect_zero[0])/500, (data.position.z- self.kinect_zero[1])/500])
 
             # Get current end-effector pose, sparate position and rotation
             goal_pos = self.zero_pose[0:3] + delta
@@ -69,9 +69,9 @@ class HapticDemo(object):
             c = manipulator.check_contact()
             if c and time.time() - self.touched_last_t > 0.7:
                 if not self.touched_last:
-                    self.pulse3.play(blocking=False, loop=False, device=1)
+                    self.pulse3.play(blocking=False, loop=False, device=3)
                 else:
-                    self.noise3.play(blocking=False, loop=True, device=1)
+                    self.noise3.play(blocking=False, loop=True, device=3)
                 self.touched_last_t = time.time()
             elif not c and self.touched_last:
                 self.noise3.stop()
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))  # get current directory
 
     # Spawn the Jaco manipulator
-    armStartPos = [1, 0, 0.9]
+    armStartPos = [1, 0, 0.8]
     armStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
     endEffectorIndex = 8
     jaco = [p.loadURDF(currentdir + "/models/urdf/jaco.urdf")]  # load arm
@@ -115,7 +115,7 @@ if __name__ == '__main__':
 
     # Initialize the manipulator class
     manipulator = Manipulator(jaco, cid, endEffectorIndex, 'p')
-    jointPositions = [0, 3.14, 3.14 / 2, -3.14 / 2, -3.14 / 2, 0, 0, 0, 0]  # set joint position goal
+    jointPositions = [0, 3.14, 3.14 / 2, -3.14 / 2, 0, 0, 0, 0, 0]  # set joint position goal
     manipulator.set_joint_position_goal(jointPositions)
     manipulator.update()  # update joint position
     time.sleep(1)

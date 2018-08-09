@@ -88,7 +88,7 @@ class Manipulator(object):
         Position control loop, max torques set to an arbitrary 5000
         """
         p.setJointMotorControlArray(self.arm[0], jointIndices=self._active_joint_indices,
-                                    controlMode=p.POSITION_CONTROL, targetPositions=cmd, forces = [100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000])
+                                    controlMode=p.POSITION_CONTROL, targetPositions=cmd, forces = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000])
 
     def _joint_velocity_control(self, cmd):
         """

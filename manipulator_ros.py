@@ -59,7 +59,7 @@ class HapticDemo(object):
         else:
             # Get hand position relative to starting point
             # (i.e. delta to be applied to current manipulator position)
-            delta = np.array([(data.position.x - self.kinect_zero[0])/500, (data.position.y- self.kinect_zero[1])/500, (data.position.z- self.kinect_zero[2])/500])
+            delta = np.array([(data.position.z - self.kinect_zero[2])/500, (data.position.x- self.kinect_zero[0])/500, (data.position.y- self.kinect_zero[1])/500])
 
             # Get current end-effector pose, sparate position and rotation
             goal_pos = self.zero_pose[0:3] + delta

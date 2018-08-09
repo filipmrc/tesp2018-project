@@ -19,32 +19,40 @@ class HapticDemo(object):
         rospy.init_node('listener', anonymous=True)
 
         # Start up the ROS subscriber for Kinect
-        rospy.Subscriber("/servo/command", Float64MultiArray, self.callback)
+        rospy.Subscriber("/kinect_pose", Pose, self.callback)
+
+        # Flag for Kinect initialization
+        self.kinect_zero_set = False
 
         # Start spinning thread
         rospy.spin()
 
 
-    def callback(self, msg):
-        # Get hand position relative to starting point
-        # (i.e. delta to be applied to current manipulator position)
-        delta = np.array([msg.data[0], msg.data[1], msg.data[2]])
+    def callback(self, data):
+        if not self.kinect_zero_set:
+            self.kinect_zero_set = rospy.get_param("kinect_zero_set")
+            self.kinect_zero = np.array([data.position.x,data.position.y,data.position.z])
 
-        # Get current end-effector pose, sparate position and rotation
-        pose = self.m.get_end_effector_pose()
-        goal_pos = pose[0:3] + delta
-        goal_rot = pose[4:7]
+            self.zero_pose = self.m.get_end_effector_pose()
+        else:
+            # Get hand position relative to starting point
+            # (i.e. delta to be applied to current manipulator position)
+            delta = np.array([(data.position.x - self.kinect_zero[0])/1000, (data.position.y- self.kinect_zero[1])/1000, (data.position.z- self.kinect_zero[2])/1000])
 
-        # Check for collisions
-        collision = self.m.check_contact()
+            # Get current end-effector pose, sparate position and rotation
+            goal_pos = self.zero_pose[0:3] + delta
+            goal_rot = self.zero_pose[4:7]
 
-        # If in collision apply vibration
-        if collision:
-            self.vibrate()
+            # Check for collisions
+            collision = self.m.check_contact()
 
-        # Set the goal for the manipulator object and
-        self.m.set_frame_pose_goal(endEffectorIndex, goal_pos, goal_rot)
-        self.m.update()
+            # If in collision apply vibration
+            if collision:
+                self.vibrate()
+
+            # Set the goal for the manipulator object and
+            self.m.set_frame_pose_goal(endEffectorIndex, goal_pos, goal_rot)
+            self.m.update()
 
     def vibrate(self):
         pulse1 = Sine(frequency=80)

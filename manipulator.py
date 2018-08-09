@@ -269,6 +269,7 @@ class Manipulator(object):
         # run iteration of control loop
         if self._control_method == 'p':
             self._joint_position_control(self.pos_cmd)
+            #self._hard_set_joint_positions(self.pos_cmd)
         elif self._control_method == 'v':
             self._joint_velocity_control(self.vel_cmd)
 

@@ -69,9 +69,9 @@ class HapticDemo(object):
             c = manipulator.check_contact()
             if c and time.time() - self.touched_last_t > 0.7:
                 if not self.touched_last:
-                    self.pulse3.play(blocking=False, loop=False, device=3)
+                    self.pulse3.play(blocking=False, loop=False, device=11) #3
                 else:
-                    self.noise3.play(blocking=False, loop=True, device=3)
+                    self.noise3.play(blocking=False, loop=True, device=11)
                 self.touched_last_t = time.time()
             elif not c and self.touched_last:
                 self.noise3.stop()
@@ -98,20 +98,11 @@ if __name__ == '__main__':
     currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))  # get current directory
 
     # Spawn the Jaco manipulator
-    armStartPos = [1, 0, 0.8]
+    armStartPos = [1, 0, 0.1]
     armStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
     endEffectorIndex = 8
     jaco = [p.loadURDF(currentdir + "/models/urdf/jaco.urdf")]  # load arm
     p.resetBasePositionAndOrientation(jaco[0], armStartPos, armStartOrientation)
-
-    # Spawn environment
-    p.loadURDF("plane.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)  # load plane
-    p.loadURDF("table/table.urdf", 1.000000,-0.200000,0.000000,0.000000,0.000000,0.707107,0.707107)
-    objects = [p.loadURDF("jenga/jenga.urdf", 1.300000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
-    objects = [p.loadURDF("jenga/jenga.urdf", 1.200000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
-    objects = [p.loadURDF("jenga/jenga.urdf", 1.100000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
-    objects = [p.loadURDF("jenga/jenga.urdf", 1.000000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
-    objects = [p.loadURDF("jenga/jenga.urdf", 0.900000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
 
     # Initialize the manipulator class
     manipulator = Manipulator(jaco, cid, endEffectorIndex, 'p')
@@ -119,6 +110,17 @@ if __name__ == '__main__':
     manipulator.set_joint_position_goal(jointPositions)
     manipulator.update()  # update joint position
     time.sleep(1)
+
+    # Spawn environment
+    p.loadURDF("plane.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)  # load plane
+    #p.loadURDF("table/table.urdf", 0.500000,-0.200000,0.000000,0.000000,0.000000,0,1)
+    #objects = [p.loadURDF("jenga/jenga.urdf", 1.300000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    #objects = [p.loadURDF("jenga/jenga.urdf", 1.200000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    #objects = [p.loadURDF("jenga/jenga.urdf", 1.100000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    #objects = [p.loadURDF("jenga/jenga.urdf", 1.000000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    #objects = [p.loadURDF("jenga/jenga.urdf", 0.900000,-0.700000,0.750000,0.000000,0.707107,0.000000,0.707107)]
+    #objects = [p.loadSDF("kiva_shelf/model.sdf")]
+    p.loadURDF("sphere2.urdf", 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000)
 
     # Initialize haptic demo class/container whatever
     n = HapticDemo(manipulator)
